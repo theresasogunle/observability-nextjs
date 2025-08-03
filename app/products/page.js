@@ -1,12 +1,16 @@
 // app/products/page.js
 async function getProducts() {
+  
+  
   const res = await fetch(`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products`);
   if (!res.ok) throw new Error("Failed to fetch products");
   return res.json();
 }
 
+
+
 export default async function ProductsPage() {
-  const products = await getProducts();
+  const products = typeof window !== "undefined" ? await getProducts() : [];
 
   return (
     <div>
